@@ -1,14 +1,12 @@
 package com.projeto.raizes.domain.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import com.projeto.raizes.domain.enums.StatusPedido;
 import com.projeto.raizes.domain.enums.CanalPedido;
 
-@Data
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
@@ -51,4 +49,34 @@ public class Pedido {
         this.criadoEm = LocalDateTime.now();
         this.status = StatusPedido.AGUARDANDO_PAGAMENTO;
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Cliente getCliente() { return cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+
+    public Unidade getUnidade() { return unidade; }
+    public void setUnidade(Unidade unidade) { this.unidade = unidade; }
+
+    public StatusPedido getStatus() { return status; }
+    public void setStatus(StatusPedido status) { this.status = status; }
+
+    public CanalPedido getCanalPedido() { return canalPedido; }
+    public void setCanalPedido(CanalPedido canalPedido) { this.canalPedido = canalPedido; }
+
+    public BigDecimal getTotal() { return total; }
+    public void setTotal(BigDecimal total) { this.total = total; }
+
+    public String getFormaPagamento() { return formaPagamento; }
+    public void setFormaPagamento(String formaPagamento) { this.formaPagamento = formaPagamento; }
+
+    public String getStatusPagamento() { return statusPagamento; }
+    public void setStatusPagamento(String statusPagamento) { this.statusPagamento = statusPagamento; }
+
+    public List<ItemPedido> getItens() { return itens; }
+    public void setItens(List<ItemPedido> itens) { this.itens = itens; }
+
+    public LocalDateTime getCriadoEm() { return criadoEm; }
+    public void setCriadoEm(LocalDateTime criadoEm) { this.criadoEm = criadoEm; }
 }
