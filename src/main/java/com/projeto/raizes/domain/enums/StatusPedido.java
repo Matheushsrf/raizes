@@ -1,10 +1,10 @@
 package com.projeto.raizes.domain.enums;
 
 public enum StatusPedido {
-    CRIADO,
-    PAGO,
+    AGUARDANDO_PAGAMENTO,
+    PAGAMENTO_APROVADO,
     EM_PREPARO,
     PRONTO,
-    FINALIZADO,
+    ENTREGUE,
     CANCELADO
 }

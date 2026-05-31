@@ -17,15 +17,18 @@ public class PedidoController {
     private final ClienteRepository clienteRepository;
     private final ProdutoRepository produtoRepository;
     private final EstoqueRepository estoqueRepository;
+    private final UnidadeRepository unidadeRepository;
 
     public PedidoController(PedidoRepository pedidoRepository,
                              ClienteRepository clienteRepository,
                              ProdutoRepository produtoRepository,
-                             EstoqueRepository estoqueRepository) {
+                             EstoqueRepository estoqueRepository,
+                             UnidadeRepository unidadeRepository) {
         this.pedidoRepository = pedidoRepository;
         this.clienteRepository = clienteRepository;
         this.produtoRepository = produtoRepository;
         this.estoqueRepository = estoqueRepository;
+        this.unidadeRepository = unidadeRepository;
     }
 
     @PostMapping
@@ -41,6 +44,13 @@ public class PedidoController {
             return ResponseEntity.status(404)
                 .body(Map.of("error", "CLIENTE_NAO_ENCONTRADO",
                              "message", "Cliente não encontrado."));
+        }
+
+        Optional<Unidade> unidadeOpt = unidadeRepository.findById(unidadeId);
+        if (unidadeOpt.isEmpty()) {
+            return ResponseEntity.status(404)
+                .body(Map.of("error", "UNIDADE_NAO_ENCONTRADA",
+                             "message", "Unidade não encontrada."));
         }
 
         List<Map<String, Object>> itensBody = (List<Map<String, Object>>) body.get("itens");
@@ -83,6 +93,7 @@ public class PedidoController {
 
         Pedido pedido = new Pedido();
         pedido.setCliente(clienteOpt.get());
+        pedido.setUnidade(unidadeOpt.get());
         pedido.setCanalPedido(CanalPedido.valueOf(canal));
         pedido.setFormaPagamento(formaPagamento);
         pedido.setTotal(total);
