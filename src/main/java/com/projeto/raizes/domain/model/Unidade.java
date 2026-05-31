@@ -1,9 +1,7 @@
 package com.projeto.raizes.domain.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "unidades")
 public class Unidade {
@@ -22,8 +20,26 @@ public class Unidade {
     private String estado;
 
     @Column(nullable = false)
-    private String tipo; // COMPLETA ou REDUZIDA
+    private String tipo;
 
     @Column(nullable = false)
     private Boolean ativa = true;
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public String getCidade() { return cidade; }
+    public void setCidade(String cidade) { this.cidade = cidade; }
+
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
+
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+
+    public Boolean getAtiva() { return ativa; }
+    public void setAtiva(Boolean ativa) { this.ativa = ativa; }
 }
